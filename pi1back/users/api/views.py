@@ -2,8 +2,8 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth import get_user_model
 
-from .serializers import CreateUserSerializer, UpdateUserSerializer
-from .permissions import DefaultPermission
+from .serializers import CreateUserSerializer, GenericUserSerializer
+from ...shared.permissions import DefaultPermission
 
 User = get_user_model()
 
@@ -15,5 +15,5 @@ class UserViewSet(ModelViewSet):
     def get_serializer(self, *args, **kwargs):
         if self.action == 'create':
             return CreateUserSerializer(*args, **kwargs)
-        return UpdateUserSerializer(*args, **kwargs)
+        return GenericUserSerializer(*args, **kwargs)
 

@@ -3,7 +3,14 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class CreateUserSerializer(serializers.ModelSerializer):
+class CommonUserValidation:
+    def validate(self, data):
+        roles = [data.get('is_professor', False), data.get('is_aluno', False), data.get('is_responsavel', False)]
+        if sum(roles) > 1:
+            raise serializers.ValidationError("A user cannot have more than one role.")
+        return data    
+
+class CreateUserSerializer(CommonUserValidation, serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
 
@@ -17,7 +24,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-class UpdateUserSerializer(serializers.ModelSerializer):
+class GenericUserSerializer(CommonUserValidation, serializers.ModelSerializer):
 
     class Meta:
         model = User
