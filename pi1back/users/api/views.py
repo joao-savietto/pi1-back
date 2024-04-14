@@ -3,14 +3,14 @@ from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth import get_user_model
 
 from .serializers import CreateUserSerializer, GenericUserSerializer
-from ...shared.permissions import DefaultPermission
+from ...shared.permissions import IsAuthenticated
 
 User = get_user_model()
 
 class UserViewSet(ModelViewSet):
     serializer_class = CreateUserSerializer
     queryset = User.objects.all()
-    permission_classes = [DefaultPermission]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         if self.action == 'create':

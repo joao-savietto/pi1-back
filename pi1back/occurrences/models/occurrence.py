@@ -20,12 +20,12 @@ class Occurrence(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='occurrences')
+    created_by = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='teacher_occurrences')
     viewed_at = models.DateTimeField(null=True, blank=True)
     is_viewed = models.BooleanField(default=False)
     description = models.TextField(blank=True, default='')
     occurrence_type = models.CharField(max_length=255, choices=OCCURRENCE_CHOICES, default=OUTRO)
-    student = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='occurrences_student')
+    student = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='student_occurrences')
 
     class Meta:
         ordering = ['-created_at']
