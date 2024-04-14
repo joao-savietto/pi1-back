@@ -25,7 +25,7 @@ class User(AbstractUser):
     is_professor = models.BooleanField(default=False)
     is_aluno = models.BooleanField(default=False)
     is_responsavel = models.BooleanField(default=False)
-    children = models.ManyToManyField('self', related_name='parents', blank=True)
+    children = models.ManyToManyField('self', blank=True)
 
     objects = CustomUserManager()
 

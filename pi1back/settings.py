@@ -12,8 +12,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
+import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load .env file if exists
+env = environ.Env()
+env.read_env('.env')
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 AUTH_USER_MODEL = 'users.User'
@@ -82,11 +87,14 @@ WSGI_APPLICATION = 'pi1back.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('MYSQL_DATABASE'),
+        'USER': env('MYSQL_USER'),
+        'PASSWORD': env('MYSQL_PASSWORD'),
+        'HOST': env('MYSQL_HOST', default='localhost'),
+        'PORT': env('MYSQL_PORT', default='3306'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
