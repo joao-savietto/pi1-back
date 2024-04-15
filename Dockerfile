@@ -19,4 +19,5 @@ RUN apt update && apt install -y default-libmysqlclient-dev build-essential pkg-
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-
+# Run entrypoint.sh
+ENTRYPOINT ["/app/start_django.sh"]
