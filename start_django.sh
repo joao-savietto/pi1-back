@@ -21,5 +21,6 @@ wait_for_db() {
 
 # Wait for the MySQL server to be ready
 wait_for_db $MYSQL_HOST $MYSQL_PORT
+python manage.py migrate
 
 exec "$@"
