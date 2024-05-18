@@ -44,7 +44,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3000",
     "http://172.17.0.2:3000",
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "http://localhost:4173",
+    "http://localhost:5174",
+    "https://pi1back.savietto.app",
+    "https://ocorrencias-pi.savietto.app"
 ] + [f"http://{host}" for host in ALLOWED_HOSTS] + [f"https://{host}" for host in ALLOWED_HOSTS]
 
 
