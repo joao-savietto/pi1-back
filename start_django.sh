@@ -19,8 +19,19 @@ wait_for_db() {
   done
 }
 
-# Wait for the MySQL server to be ready
 wait_for_db $MYSQL_HOST $MYSQL_PORT
-python manage.py migrate
+while getopts ":h:" opt; do
+  case $opt in
+    h) COMMAND="$OPTARG";;
+    \?) echo "Invalid option: -$OPTARG"; exit 1;;
+  esac
+done
 
-exec "$@"
+shift $(($OPTIND - 1))
+
+if [ -z "$COMMAND" ]; then
+  COMMAND="gunicorn pi1back.wsgi:application --bind 0.0.0.0:8000"
+fi
+
+python manage.py migrate
+exec ${COMMAND}
