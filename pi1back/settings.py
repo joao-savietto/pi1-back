@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 from django.core.exceptions import ImproperlyConfigured
 import environ
+from corsheaders.defaults import default_headers
 
 # Load .env file if exists
 env = environ.Env()
@@ -42,13 +43,18 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:3000",
-    "http://172.17.0.2:3000"
+    "http://172.17.0.2:3000",
+    "http://localhost:5173"
 ] + [f"http://{host}" for host in ALLOWED_HOSTS] + [f"https://{host}" for host in ALLOWED_HOSTS]
 
 
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "content-disposition",
+]
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,12 +64,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
+    "django_filters",
     'pi1back.users',
-    "pi1back.occurrences",
+    "pi1back.occurrences",    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -158,6 +166,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],   
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
 }
 
 SPECTACULAR_SETTINGS = {

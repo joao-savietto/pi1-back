@@ -20,4 +20,4 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Run entrypoint.sh
-ENTRYPOINT ["/app/start_django.sh", "gunicorn", "pi1back.wsgi:application", "--bind", "0.0.0.0:8000"]
+ENTRYPOINT ["/app/start_django.sh"]

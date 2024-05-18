@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from pi1back.occurrences.models import Classroom
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -25,7 +26,7 @@ class User(AbstractUser):
     is_professor = models.BooleanField(default=False)
     is_aluno = models.BooleanField(default=False)
     is_responsavel = models.BooleanField(default=False)
-    children = models.ManyToManyField('self', blank=True)
+    responsavel = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
 
     objects = CustomUserManager()
 
@@ -34,3 +35,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            if self.is_aluno:
+                classrooms = Classroom.objects.filter(members = self)
+                if classrooms.exists():
+                    classroom = classrooms.first()
+                    classroom.members.remove(self)
+                    classroom.save()
+        super().save(*args, **kwargs)
+
+

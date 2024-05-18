@@ -3,12 +3,11 @@ from rest_framework import permissions
 
 class IsAuthenticated(permissions.BasePermission):
     def has_permission(self, request, view):
-        print(request.user)
         return request.user.is_authenticated
     
 class IsSuperUserOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        if not request.user.is_authenticated:
+        if not request.user.is_authenticated or request.user.is_aluno == True:
             return False
         if request.method in permissions.SAFE_METHODS:
             return True        
@@ -16,7 +15,7 @@ class IsSuperUserOrReadOnly(permissions.BasePermission):
     
 class IsProfessorOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        if not request.user.is_authenticated:
+        if not request.user.is_authenticated or request.user.is_aluno == True:
             return False
         if request.method in permissions.SAFE_METHODS:
             return True
