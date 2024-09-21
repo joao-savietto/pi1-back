@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from pi1back.occurrences.models import Classroom
+from pi1back.classrooms.models import Classroom
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):

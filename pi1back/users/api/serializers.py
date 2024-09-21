@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from pi1back.occurrences.api.serializers import ClassroomSerializer
-from pi1back.occurrences.models.classroom import Classroom
+from pi1back.classrooms.api.serializers import ClassroomSerializer
+from pi1back.classrooms.models.classroom import Classroom
 
 User = get_user_model()
 
@@ -64,4 +64,3 @@ class GetUserSerializer(CommonUserValidation, serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'nome', 'email', 'is_professor', 'is_aluno', 'is_responsavel', 'is_superuser', 'responsavel', 'classroom']
-

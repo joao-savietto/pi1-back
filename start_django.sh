@@ -19,6 +19,9 @@ wait_for_db() {
   done
 }
 
+# print mysql host and port
+echo "MySQL host: $MYSQL_HOST, port: $MYSQL_PORT"
+
 wait_for_db $MYSQL_HOST $MYSQL_PORT
 while getopts ":h:" opt; do
   case $opt in
