@@ -27,6 +27,7 @@ class User(AbstractUser):
     is_aluno = models.BooleanField(default=False)
     is_responsavel = models.BooleanField(default=False)
     responsavel = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
+    teacher_subjects = models.ManyToManyField('grading.Subject', blank=True)
 
     objects = CustomUserManager()
 

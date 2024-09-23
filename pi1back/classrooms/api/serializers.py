@@ -2,7 +2,9 @@ from rest_framework import serializers
 from ...classrooms.models import Classroom
 from django.contrib.auth import get_user_model
 
+
 User = get_user_model()
+
 
 class TeacherSerializer(serializers.ModelSerializer):
 
