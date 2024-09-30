@@ -53,7 +53,7 @@ class GetUserSerializer(CommonUserValidation, serializers.ModelSerializer):
             return self.to_representation(obj.responsavel)
         return None
     
-    def get_classroom(self, obj):
+    def get_classroom(self, obj) -> List[Dict[str, Any]]:
         try:
             user_classroom = Classroom.objects.filter(members=obj).all()
             user_classroom = ClassroomSerializer(user_classroom, many=True).data
