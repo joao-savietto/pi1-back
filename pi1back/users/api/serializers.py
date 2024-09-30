@@ -6,7 +6,7 @@ from pi1back.classrooms.models.classroom import Classroom
 
 User = get_user_model()
 
-from typing import TypedDict, List
+from typing import TypedDict, List, Dict, Any
 
 class UserTypedDict(TypedDict):
     email: str
