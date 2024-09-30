@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 # Copy project
-COPY . /app/
+COPY . /app
 
 RUN chmod +x start_django.sh
 

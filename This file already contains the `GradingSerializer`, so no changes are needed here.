@@ -1,7 +1,0 @@
-from rest_framework import serializers
-from .models import Grading
-
-class GradingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Grading
-        fields = '__all__'

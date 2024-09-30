@@ -12,6 +12,7 @@ User = get_user_model()
 class ClassroomViewSet(viewsets.ModelViewSet):
     serializer_class = ClassroomSerializer
     permission_classes = [IsSuperUserOrReadOnly]
+    queryset = Classroom.objects.none()
 
     def get_queryset(self):
         user = self.request.user

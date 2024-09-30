@@ -30,11 +30,20 @@ while getopts ":h:" opt; do
   esac
 done
 
-shift $(($OPTIND - 1))
+args="$@"
+# if no arguments passed, use default, which is to runserver
 
-if [ -z "$COMMAND" ]; then
-  COMMAND="gunicorn pi1back.wsgi:application --bind 0.0.0.0:8000"
+cd /app
+
+if [ -z "$args" ]; then
+    if [ "${NO_RELOAD:-0}" -eq 1 ]; then
+        args="python manage.py runserver 0.0.0.0:8000 --noreload"
+    else
+        args="python manage.py runserver 0.0.0.0:8000"
+    fi
 fi
 
+# reload bashrc
 python manage.py migrate
-exec ${COMMAND}
+source ~/.bashrc
+exec $args
