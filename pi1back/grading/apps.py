@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ClassroomsConfig(AppConfig):
+class GradingConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'pi1back.classrooms'
+    name = 'pi1back.grading'

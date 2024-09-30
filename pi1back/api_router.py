@@ -1,9 +1,11 @@
 from rest_framework.routers import DefaultRouter
 
 from pi1back.users.api.views import UserViewSet
-from pi1back.occurrences.api.views import (
-    ClassroomViewSet,
+from pi1back.occurrences.api.views import (    
     OccurrenceViewSet
+)
+from pi1back.classrooms.api.views import (
+    ClassroomViewSet
 )
 
 router = DefaultRouter()

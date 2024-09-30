@@ -1,29 +1,15 @@
 from rest_framework import serializers
 from typing import TypedDict
 from django.contrib.auth import get_user_model
+from pi1back.classrooms.api.serializers import (
+    TeacherSerializer,
+    StudentSerializer
+)
 
 User = get_user_model()
 
-from pi1back.occurrences.models import (
-    Occurrence,
-    Classroom
-)
-
-class StudentSerializer(serializers.ModelSerializer):
-    occurrence_count = serializers.SerializerMethodField()
-
-    def get_occurrence_count(self, obj) -> int:
-        return obj.student_occurrences.count()
-
-    class Meta:
-        model = User
-        fields = ['id', 'nome', 'occurrence_count']
-
-class TeacherSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['id', 'nome']
+from pi1back.occurrences.models import Occurrence
+from pi1back.classrooms.models import Classroom
 
 class OccurrenceSerializer(serializers.ModelSerializer):
     teacher = TeacherSerializer(read_only=True)
@@ -44,18 +30,3 @@ class OccurrenceSerializer(serializers.ModelSerializer):
             data['teachers'] = TeacherSerializer(instance.created_by).data
             del data['created_by']
         return data
-
-class ClassroomSerializer(serializers.ModelSerializer):
-    teachers = TeacherSerializer(many=True, read_only=True)
-    students = StudentSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Classroom
-        fields = '__all__'
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['teachers'] = TeacherSerializer(instance.members.filter(is_professor=True), many=True).data
-        representation['students'] = StudentSerializer(instance.members.filter(is_aluno=True), many=True).data
-        return representation
-    

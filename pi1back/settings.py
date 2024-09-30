@@ -70,7 +70,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "django_filters",
     'pi1back.users',
-    "pi1back.occurrences",    
+    "pi1back.occurrences",  
+    "pi1back.classrooms",
+    "pi1back.grading"  
 ]
 
 MIDDLEWARE = [
