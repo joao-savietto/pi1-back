@@ -2,9 +2,14 @@ from rest_framework import serializers
 from pi1back.grading.models import Grading, Subject
 
 class GradingSerializer(serializers.ModelSerializer):
+    subject_id =  serializers.IntegerField(read_only=True)
+    final_grade = serializers.FloatField(write_only=True, default=0)
+
     class Meta:
         model = Grading
-        fields = ['id', 'subject', 'user', 'first_exam', 'second_exam', 'third_exam', 'practice_exam', 'year', 'quarter']
+        fields = ['id', 'subject', 'user', 'first_exam', 
+        'second_exam', 'third_exam', 'practice_exam', 
+        'year', 'quarter', 'subject_id', 'final_grade']
 
     def create(self, validated_data):
         # Calculate the final grade

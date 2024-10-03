@@ -7,6 +7,7 @@ class Occurrence(models.Model):
     MAU_COMPORTAMENTO = 'MAU_COMPORTAMENTO'
     FALTOU_AULA = 'FALTOU_AULA'
     CHEGOU_ATRASADO = 'CHEGOU_ATRASADO'
+    NOTA_INSUFICIENTE = 'NOTA_INSUFICIENTE'
     OUTRO = 'OUTRO'
 
     OCCURRENCE_CHOICES = [
@@ -15,6 +16,7 @@ class Occurrence(models.Model):
         (MAU_COMPORTAMENTO, 'Mau comportamento'),
         (FALTOU_AULA, 'Faltou aula'),
         (CHEGOU_ATRASADO, 'Chegou atrasado'),
+        (NOTA_INSUFICIENTE, 'Nota insuficiente'),
         (OUTRO, 'Outro'),
     ]
 
