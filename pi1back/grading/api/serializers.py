@@ -18,5 +18,7 @@ class GradingSerializer(serializers.ModelSerializer):
         
         # Add the progress field to the representation
         representation['progress'] = round(progress, 2)  # Round to 2 decimal places
+        representation["subject_id"] = instance.subject.id
+        representation["subject"] = instance.subject.name
         
         return representation
