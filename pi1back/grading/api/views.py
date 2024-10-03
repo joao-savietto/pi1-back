@@ -1,6 +1,8 @@
 from rest_framework import viewsets
-from ..models import Grading
-from .serializers import GradingSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from pi1back.grading.models import Grading
+from pi1back.grading.api.serializers import GradingSerializer
+from pi1back.grading.api.filters import GradingFilter
 from pi1back.shared.permissions import IsSuperUserOrReadOnly, IsProfessorOrReadOnly
 from django.contrib.auth import get_user_model
 from pi1back.classrooms.models import Classroom
@@ -11,6 +13,8 @@ class GradingViewSet(viewsets.ModelViewSet):
     queryset = Grading.objects.all()
     serializer_class = GradingSerializer
     permission_classes = [IsSuperUserOrReadOnly | IsProfessorOrReadOnly]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = GradingFilter
 
     def get_queryset(self):
         user = self.request.user
