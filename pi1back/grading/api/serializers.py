@@ -4,17 +4,26 @@ from pi1back.grading.models import Grading, Subject
 class GradingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grading
-        fields = '__all__'
+        fields = ['id', 'subject', 'user', 'first_exam', 'second_exam', 'third_exam', 'practice_exam', 'year', 'quarter']
+
+    def create(self, validated_data):
+        # Calculate the final grade
+        final_grade = validated_data['first_exam'] + validated_data['second_exam'] + validated_data['third_exam'] + validated_data['practice_exam']
+        validated_data['final_grade'] = final_grade
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        # Calculate the final grade
+        final_grade = validated_data.get('first_exam', instance.first_exam) + validated_data.get('second_exam', instance.second_exam) + validated_data.get('third_exam', instance.third_exam) + validated_data.get('practice_exam', instance.practice_exam)
+        instance.final_grade = final_grade
+        return super().update(instance, validated_data)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         
-        # Calculate the final grade based on the business logic
-        final_grade = instance.first_exam + instance.second_exam + instance.third_exam + instance.practice_exam
-        
         # Calculate the progress as a percentage
         passing_grade = 5.0  # Assuming the passing grade is 5
-        progress = (final_grade / (4 * passing_grade)) * 100  # 4 exams in total
+        progress = (instance.final_grade / (4 * passing_grade)) * 100  # 4 exams in total
         
         # Add the progress field to the representation
         representation['progress'] = round(progress, 2)  # Round to 2 decimal places
