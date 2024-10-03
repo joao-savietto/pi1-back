@@ -22,7 +22,7 @@ from django.db.models import Q
     update=extend_schema(description='Atualizar um usuário', summary='Atualizar detalhes de um usuário existente'),
     partial_update=extend_schema(description='Atualizar parcialmente um usuário', summary='Atualizar alguns campos de um usuário existente'),
     me=extend_schema(description='Recuperar o usuário logado', summary='Obter detalhes do usuário logado'),
-    children=extend_schema(description='Listar usuários filhos do usuário lugado', summary='Listar usuários filhos do usuário lugado'),
+    children=extend_schema(description='Listar usuários filhos do usuário logado', summary='Listar usuários filhos do usuário logado'),
     teachers=extend_schema(description='Listar usuários professores', summary='Listar de usuários professores'),
     parents=extend_schema(description='Listar usuários pais', summary='Listar de usuários pais'),
     students=extend_schema(description='Listar usuários alunos', summary='Listar de usuários alunos'),
