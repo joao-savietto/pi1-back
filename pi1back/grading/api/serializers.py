@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pi1back.grading.models import Grading
+from pi1back.grading.models import Grading, Subject
 
 class GradingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,3 +22,8 @@ class GradingSerializer(serializers.ModelSerializer):
         representation["subject"] = instance.subject.name
         
         return representation
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = '__all__'
