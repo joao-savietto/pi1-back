@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from pi1back.grading.models import Grading
@@ -9,6 +10,14 @@ from pi1back.classrooms.models import Classroom
 
 User = get_user_model()
 
+@extend_schema_view(
+    list=extend_schema(description='Lista todas as notas', summary='Obter lista de notas'),
+    retrieve=extend_schema(description='Recuperar uma nota por ID', summary='Obter uma nota específica'),
+    create=extend_schema(description='Criar uma nota', summary='Criar uma nova nota'),
+    update=extend_schema(description='Atualizar uma nota', summary='Atualizar detalhes de uma nota existente'),
+    partial_update=extend_schema(description='Atualizar parcialmente uma nota', summary='Atualizar alguns campos de uma nota existente'),
+    destroy=extend_schema(description='Excluir uma nota', summary='Excluir uma nota existente'),
+)
 class GradingViewSet(viewsets.ModelViewSet):
     queryset = Grading.objects.all()
     serializer_class = GradingSerializer
