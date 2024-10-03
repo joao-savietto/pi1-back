@@ -1,0 +1,100 @@
+[
+    {
+        "model": "grading.Subject",
+        "pk": 1,
+        "fields": {
+            "name": "Matemática"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 2,
+        "fields": {
+            "name": "Português"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 3,
+        "fields": {
+            "name": "História"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 4,
+        "fields": {
+            "name": "Geografia"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 5,
+        "fields": {
+            "name": "Ciências"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 6,
+        "fields": {
+            "name": "Física"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 7,
+        "fields": {
+            "name": "Química"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 8,
+        "fields": {
+            "name": "Biologia"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 9,
+        "fields": {
+            "name": "Inglês"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 10,
+        "fields": {
+            "name": "Educação Física"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 11,
+        "fields": {
+            "name": "Artes"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 12,
+        "fields": {
+            "name": "Filosofia"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 13,
+        "fields": {
+            "name": "Sociologia"
+        }
+    },
+    {
+        "model": "grading.Subject",
+        "pk": 14,
+        "fields": {
+            "name": "Informática"
+        }
+    }
+]
